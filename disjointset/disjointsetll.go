@@ -103,3 +103,61 @@ func (set *DisjointSetLL) Union(a, b int) {
 	if region1.id == region2.id {
 		return
 	}
+	set.totalComponents--
+	if region1.rank < region2.rank {
+		region2.head, region1.last.next = region1.head, region2.head
+		region2.last.next = region2.head
+		region2.size += region1.size
+		region1.parent = region2
+
+	} else {
+		region1.head, region2.last.next = region2.head, region1.head
+		region1.last.next = region1.head
+		region1.size += region2.size
+		region2.parent = region1
+		if region1.rank == region2.rank {
+			region1.rank++
+		}
+	}
+}
+
+/**
+ * Returns all the elements that belong too the region that v belongs to
+ */
+func (set *DisjointSetLL) Elements(v int) chan int {
+	ch := make(chan int)
+	go func() {
+		region := set.Find(v)
+		node := set.regions[region].head
+		ch <- node.id
+		for set.regions[region].head != node.next {
+			ch <- node.next.id
+			node = node.next
+		}
+		close(ch)
+	}()
+	return ch
+}
+
+/**
+ * Returns true if a and b belong to the same region
+ */
+func (set *DisjointSetLL) Connected(a, b int) bool {
+	return set.Find(a) == set.Find(b)
+}
+
+/**
+ * Print the dijsointset linked list
+ */
+func (set *DisjointSetLL) Print() {
+	for v := 0; v < len(set.regions); v++ {
+		region := set.Find(v)
+		if region == v {
+			fmt.Printf("%d : ", region)
+			for e := range set.Elements(region) {
+				fmt.Printf("%d -> ", e)
+			}
+			fmt.Printf("(%d)\n", set.regions[region].last.next.id)
+		}
+	}
+}
