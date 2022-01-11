@@ -20,4 +20,21 @@ func TestInitializationAllDisconnectedLL(t *testing.T) {
 	set := NewDisjointSetLL(5)
 	for i := 0; i < 5; i++ {
 		for j := 0; j < 5; j++ {
-			assert.Equal(t, set.Connected(i, j), i == j
+			assert.Equal(t, set.Connected(i, j), i == j)
+		}
+	}
+}
+
+func TestUnionLL(t *testing.T) {
+	set := NewDisjointSetLL(5)
+	set.Union(0, 4)
+	assert.True(t, set.Connected(0, 4))
+}
+
+func TestNumberOfComponentsLL(t *testing.T) {
+	set := initSetLL()
+	assert.Equal(t, 4, set.TotalComponents())
+}
+
+func TestComponentSizeLL(t *testing.T) {
+	set :=
