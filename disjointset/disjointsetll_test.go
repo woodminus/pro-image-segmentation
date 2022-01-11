@@ -37,4 +37,11 @@ func TestNumberOfComponentsLL(t *testing.T) {
 }
 
 func TestComponentSizeLL(t *testing.T) {
-	set :=
+	set := initSetLL()
+	assert.Equal(t, 5, set.Size(2))
+	assert.Equal(t, 5, set.Size(5))
+	assert.Equal(t, 5, set.Size(9))
+	assert.Equal(t, 5, set.Size(7))
+	assert.Equal(t, 5, set.Size(0))
+	assert.Equal(t, 3, set.Size(3))
+	assert.Equal(t, 3, set.
