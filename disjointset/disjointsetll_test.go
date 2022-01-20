@@ -66,4 +66,7 @@ func TestElementsINterator(t *testing.T) {
 		}
 	}
 	testElements([]int{2, 5, 9, 7, 0})
-	testEleme
+	testElements([]int{3, 4, 1})
+	testElements([]int{6})
+	testElements([]int{8})
+}
