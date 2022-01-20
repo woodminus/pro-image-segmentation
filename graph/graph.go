@@ -186,3 +186,67 @@ func (g *Graph) Weight(u, v int) float64 {
 	}
 	return g.weights[v][g.weightIndex(v, u)]
 }
+
+/**
+ * Return the ids of the vertices to which v is adjacent
+ */
+func (g *Graph) Neighbors(v int) <-chan int {
+	ch := make(chan int, 4)
+	go func() {
+		x, y := v%g.width, v/g.width
+		if x+1 < g.width {
+			ch <- v + 1
+		}
+		if y+1 < g.height {
+			ch <- v + g.width
+		}
+		if g.graphType == KINGSGRAPH {
+			if y-1 >= 0 && x+1 < g.width {
+				ch <- v - g.width + 1
+			}
+			if y+1 < g.height && x+1 < g.width {
+				ch <- v + g.width + 1
+			}
+		}
+		close(ch)
+	}()
+	return ch
+}
+
+/**
+ * Returns the width of a graph
+ */
+func (g *Graph) Width() int {
+	return g.width
+}
+
+/**
+ * Returns the height of a graph
+ */
+func (g *Graph) Height() int {
+	return g.height
+}
+
+/**
+ * Returns the total number of edges that the graph has
+ */
+func (g *Graph) TotalEdges() int {
+	if g.graphType == KINGSGRAPH {
+		return 4*g.width*g.height - 3*(g.width+g.height) + 2
+	}
+	return (g.width-1)*g.height + g.width*(g.height-1)
+}
+
+/**
+ * Returns the total number of vertices that the graph has
+ */
+func (g *Graph) TotalVertices() int {
+	return g.width * g.height
+}
+
+/**
+ * Returns all the edges that the graph has
+ */
+func (g *Graph) Edges() EdgeList {
+	return g.edges
+}
