@@ -26,4 +26,12 @@ func loadGraphFromImage(imgName string, graphType GraphType) *Graph {
  */
 
 func TestInitializationGridGraph(t *testing.T) {
-	graph := New(5, 6, GRIDGRAP
+	graph := New(5, 6, GRIDGRAPH)
+	assert.Equal(t, 5, graph.Width())
+	assert.Equal(t, 6, graph.Height())
+	assert.Equal(t, 30, graph.TotalVertices())
+	assert.Equal(t, 49, graph.TotalEdges())
+}
+
+func TestEdgesReturnAllEdgesGridGraph(t *testing.T) {
+	graph := New(5, 6, GRID
