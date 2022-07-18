@@ -42,4 +42,11 @@ func TestGridGraphFromImageInitialization(t *testing.T) {
 	graph := loadGraphFromImage("../test/test.png", GRIDGRAPH)
 	assert.Equal(t, 100, graph.Width())
 	assert.Equal(t, 100, graph.Height())
-	assert.Equal(t, 19800, g
+	assert.Equal(t, 19800, graph.TotalEdges())
+	assert.Equal(t, 10000, graph.TotalVertices())
+	assert.Equal(t, len(graph.Edges()), graph.TotalEdges())
+}
+
+func TestInitializationKingsGraph(t *testing.T) {
+	graph := New(5, 6, KINGSGRAPH)
+	assert.Equal(t, 30, graph.TotalV
