@@ -59,4 +59,9 @@ func TestEdgesReturnAllEdgesKingsGraph(t *testing.T) {
 }
 
 func TestKingsGraphsFromImageInitialization(t *testing.T) {
-	graph := loadGr
+	graph := loadGraphFromImage("../test/test.png", KINGSGRAPH)
+	assert.Equal(t, 100, graph.Width())
+	assert.Equal(t, 100, graph.Height())
+	assert.Equal(t, 39402, graph.TotalEdges())
+	assert.Equal(t, 10000, graph.TotalVertices())
+	assert.Equal(t, len(graph.Edges()), graph.TotalEd
