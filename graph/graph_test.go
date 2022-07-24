@@ -49,4 +49,14 @@ func TestGridGraphFromImageInitialization(t *testing.T) {
 
 func TestInitializationKingsGraph(t *testing.T) {
 	graph := New(5, 6, KINGSGRAPH)
-	assert.Equal(t, 30, graph.TotalV
+	assert.Equal(t, 30, graph.TotalVertices())
+	assert.Equal(t, 89, graph.TotalEdges())
+}
+
+func TestEdgesReturnAllEdgesKingsGraph(t *testing.T) {
+	graph := New(5, 6, KINGSGRAPH)
+	assert.Equal(t, graph.TotalEdges(), len(graph.Edges()))
+}
+
+func TestKingsGraphsFromImageInitialization(t *testing.T) {
+	graph := loadGr
