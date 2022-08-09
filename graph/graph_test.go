@@ -64,4 +64,5 @@ func TestKingsGraphsFromImageInitialization(t *testing.T) {
 	assert.Equal(t, 100, graph.Height())
 	assert.Equal(t, 39402, graph.TotalEdges())
 	assert.Equal(t, 10000, graph.TotalVertices())
-	assert.Equal(t, len(graph.Edges()), graph.TotalEd
+	assert.Equal(t, len(graph.Edges()), graph.TotalEdges())
+}
