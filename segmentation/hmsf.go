@@ -72,3 +72,51 @@ func (s *Segmenter) hmsfMergeEdgesByWeight(edges graph.EdgeList,
 func (s *Segmenter) hmsfComputeCredit(setll *disjointset.DisjointSetLL, sigma float64) []float64 {
 	regionCredit := make([]float64, s.graph.TotalVertices(), s.graph.TotalVertices())
 	minWeights := s.hmfsMinWeights(setll)
+	for i := 0; i < s.graph.TotalVertices(); i++ {
+		contrast := minWeights[s.resultset.Find(i)] - 2*sigma
+		regionCredit[i] = contrast * math.Sqrt(4*math.Pi*float64(s.resultset.Size(i)))
+	}
+	return regionCredit
+}
+
+/**
+ * Compute the minimum weight in the border of each region.
+ */
+func (s *Segmenter) hmfsMinWeights(setll *disjointset.DisjointSetLL) []float64 {
+	minWeights := make([]float64, s.graph.TotalVertices(), s.graph.TotalVertices())
+	computed := make([]bool, s.graph.TotalVertices(), s.graph.TotalVertices())
+	for v := 0; v < s.graph.TotalVertices(); v++ {
+		region := s.resultset.Find(v)
+		if !computed[region] {
+			minWeights[region] = math.Inf(1)
+			for w := range setll.Elements(region) {
+				for n := range s.graph.Neighbors(w) {
+					if s.resultset.Find(n) != region && s.graph.Weight(w, n) < minWeights[region] {
+						minWeights[region] = s.graph.Weight(w, n)
+					}
+				}
+			}
+			computed[region] = true
+		}
+	}
+	return minWeights
+}
+
+/**
+ * Last part of the HMSF algorithm, merge regions if the credit of any of them
+ * exceeds the weight of the edge connecting them.
+ */
+func (s *Segmenter) hmsfMergeRegionsByCredit(edges graph.EdgeList, regionCredit []float64) {
+	for _, edge := range edges {
+		u := s.resultset.Find(edge.U())
+		v := s.resultset.Find(edge.V())
+		if u != v {
+			credit := utils.MinF(regionCredit[u], regionCredit[v])
+			if credit > edge.Weight() {
+				s.resultset.Union(u, v)
+				survivor := s.resultset.Find(u)
+				regionCredit[survivor] = credit - edge.Weight()
+			}
+		}
+	}
+}
