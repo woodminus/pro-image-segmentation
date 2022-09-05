@@ -21,4 +21,14 @@ import (
  * random colors.
  */
 type Segmenter struct {
-	rando
+	randomColors bool
+	img          image.Image
+	graph        *graph.Graph
+	resultset    *disjointset.DisjointSet
+	graphType    graph.GraphType
+	weightfn     graph.WeightFn
+}
+
+/**
+ * Returns a new Segmenter, generates a graph of the given graph type from
+ * the given image using the gi
