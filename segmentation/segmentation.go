@@ -15,4 +15,10 @@ import (
 )
 
 /**
- *
+ * Type used to run all the segmentation algorithms.
+ * It stores the graph, the resultset, the original image, the graph
+ * obtained from the image and if it will generate a result image with
+ * random colors.
+ */
+type Segmenter struct {
+	rando
