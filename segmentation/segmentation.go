@@ -31,4 +31,17 @@ type Segmenter struct {
 
 /**
  * Returns a new Segmenter, generates a graph of the given graph type from
- * the given image using the gi
+ * the given image using the given weight function to compute the edge
+ * weights.
+ */
+func New(img image.Image, graphType graph.GraphType,
+	weightfn graph.WeightFn) *Segmenter {
+	s := new(Segmenter)
+	s.randomColors = false
+	s.img = img
+	s.weightfn = weightfn
+	s.graphType = graphType
+	return s
+}
+
+f
