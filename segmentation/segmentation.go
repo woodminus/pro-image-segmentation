@@ -54,4 +54,16 @@ func (s *Segmenter) smoothImage(sigma float64) {
 func (s *Segmenter) buildGraph() {
 	fmt.Printf("build graph... ")
 	start := time.Now()
-	s.graph 
+	s.graph = graph.FromImage(s.img, s.weightfn, s.graphType)
+	fmt.Println(time.Since(start))
+}
+
+/**
+ * Sets the random color attribute to true or false according to val
+ */
+func (s *Segmenter) SetRandomColors(val bool) {
+	s.randomColors = val
+}
+
+/**
+ * Returns the result image. Returns nil if no segme
