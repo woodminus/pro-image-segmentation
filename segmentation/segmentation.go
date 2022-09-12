@@ -44,4 +44,14 @@ func New(img image.Image, graphType graph.GraphType,
 	return s
 }
 
-f
+func (s *Segmenter) smoothImage(sigma float64) {
+	fmt.Printf("blur image... ")
+	start := time.Now()
+	s.img = imaging.Blur(s.img, sigma, 4)
+	fmt.Println(time.Since(start))
+}
+
+func (s *Segmenter) buildGraph() {
+	fmt.Printf("build graph... ")
+	start := time.Now()
+	s.graph 
