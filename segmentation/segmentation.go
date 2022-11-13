@@ -66,4 +66,14 @@ func (s *Segmenter) SetRandomColors(val bool) {
 }
 
 /**
- * Returns the result image. Returns nil if no segme
+ * Returns the result image. Returns nil if no segmentation algorithm
+ * has been executed before.
+ */
+func (s *Segmenter) GetResultImage() image.Image {
+	if s.resultset == nil {
+		return nil
+	}
+	fmt.Printf("build image... ")
+	start := time.Now()
+	resultimg := imageFromDisjointSet(s.resultset, s.img, s.randomColors)
+	fmt.Prin
