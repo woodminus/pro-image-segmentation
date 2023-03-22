@@ -76,4 +76,6 @@ func (s *Segmenter) GetResultImage() image.Image {
 	fmt.Printf("build image... ")
 	start := time.Now()
 	resultimg := imageFromDisjointSet(s.resultset, s.img, s.randomColors)
-	fmt.Prin
+	fmt.Println(time.Since(start))
+	return resultimg
+}
