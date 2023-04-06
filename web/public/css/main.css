@@ -1,0 +1,115 @@
+
+/**
+ * Base structure
+ */
+
+html {
+  min-height: 100%;
+}
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+}
+
+.center {
+  text-align: center;
+}
+
+/**
+ * Navbar
+ */
+
+.navbar-icon {
+  padding: 10px 15px 10px 10px !important;
+}
+
+/**
+ * Sidebar
+ */
+
+.sidebar {
+  position: fixed;
+  top: 51px;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  display: block;
+  padding: 30px 15px;
+  overflow-y: auto;
+}
+
+h2 {
+  font-size: 21px;
+  margin: 0px 0px 20px 0px;
+}
+
+.sidebar p {
+  line-height: 1.5em;
+}
+
+.slider-label {
+  padding-top: 3px !important;
+}
+
+.slider-input,
+.slider-input:active,
+.slider-input:focus {
+  border-bottom: none !important;
+}
+
+.select-label {
+  padding-top: 0px !important;
+}
+
+.checkbox {
+  margin-left: -13px;
+}
+
+/**
+
+g:  padding: 10px 10px 10px 10px !important;;ithub-link {
+
+
+ * Main content
+ */
+
+.main {
+  padding: 30px 40px 15px 20px;
+  overflow: hidden;
+  min-height: 800px;
+  text-align: center;
+}
+
+.main .page-header {
+  margin-top: 0;
+}
+
+#image-selector {
+  width: 25%;
+  margin: 0 auto;
+}
+
+#original-image,
+#result-image {
+  max-width: 80%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  max-height: 690px;
+}
+
+.checkbox {
+  margin-left: 21%;
+}
+
+footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 40px;
+  width: 100%;
+}
+
+footer p {
+  margin: 10px;
+}

@@ -17,4 +17,10 @@ func TestMinOfTwoFloats(t *testing.T) {
 	assert.Equal(t, 3.1, MinF(3.1, 3.1))
 }
 
-func TestRoundingDown(t *t
+func TestRoundingDown(t *testing.T) {
+	assert.Equal(t, 3, Round(3.1))
+}
+
+func TestRoundingUp(t *testing.T) {
+	assert.Equal(t, 4, Round(3.51))
+}
