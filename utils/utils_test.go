@@ -7,4 +7,14 @@ import (
 
 func TestMinOfTwoIntegers(t *testing.T) {
 	assert.Equal(t, 3, MinI(3, 4))
-	
+	assert.Equal(t, 3, MinI(4, 3))
+	assert.Equal(t, 3, MinI(3, 3))
+}
+
+func TestMinOfTwoFloats(t *testing.T) {
+	assert.Equal(t, 3.1, MinF(3.1, 4.2))
+	assert.Equal(t, 3.1, MinF(4.2, 3.1))
+	assert.Equal(t, 3.1, MinF(3.1, 3.1))
+}
+
+func TestRoundingDown(t *t
